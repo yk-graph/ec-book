@@ -1,12 +1,13 @@
+import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-// import { getServerSession } from "next-auth";
-// import { nextAuthOptions } from "../lib/next-auth/options";
+
+import { authOptions } from "@/libs/next-auth/options";
+import SignOut from "@/components/SignOut";
 
 const Header = async () => {
-  // const session = await getServerSession(nextAuthOptions);
-  // const user = session?.user;
+  const session = await getServerSession(authOptions);
+  const user = session?.user;
 
   return (
     <header className="bg-slate-600 text-gray-100 shadow-lg">
@@ -21,30 +22,21 @@ const Header = async () => {
           >
             ホーム
           </Link>
-          {/* <Link
+          <Link
             href={user ? "/profile" : "/api/auth/signin"}
             className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
           >
             {user ? "プロフィール" : "ログイン"}
           </Link>
-          {user ? (
-            <Link
-              href={"/api/auth/signout?callbackUrl=/"}
-              className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-            >
-              ログアウト
-            </Link>
-          ) : (
-            ""
-          )} */}
+          {user ? <SignOut /> : ""}
 
           <Link href={`/profile`}>
             <Image
               width={50}
               height={50}
+              className="rounded-full"
               alt="profile_icon"
-              // src={user?.image || "/default_icon.png"}
-              src="/default_icon.png"
+              src={user?.image || "/default_icon.png"}
             />
           </Link>
         </div>

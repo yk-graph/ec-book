@@ -8,6 +8,10 @@ import prisma from "@/libs/prisma";
 export const authOptions: NextAuthOptions = {
   debug: false,
 
+  pages: {
+    signIn: "/login", // 今回はモーダルで表示するため、サインインページは指定しない
+  },
+
   adapter: PrismaAdapter(prisma),
 
   providers: [
