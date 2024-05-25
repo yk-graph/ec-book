@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 
-import { books } from "@/app/page";
+import { BookType } from "@/types";
 
 type BookProps = {
-  book: (typeof books)[0];
+  book: BookType;
 };
 
 const Book: React.FC<BookProps> = ({ book }) => {
@@ -35,8 +35,7 @@ const Book: React.FC<BookProps> = ({ book }) => {
         >
           <Image
             priority
-            src={book.thumbnail}
-            // src={book.thumbnail.url}
+            src={book.thumbnail.url}
             alt={book.title}
             width={450}
             height={350}
